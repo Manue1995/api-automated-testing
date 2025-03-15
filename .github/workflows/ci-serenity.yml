@@ -32,7 +32,7 @@ jobs:
       run: mvn clean install -DskipTests
 
     - name: Ejecutar pruebas con Serenity
-      run: mvn clean verify -Dtest=ApisTestRunner
+      run: mvn clean verify -Dtest = ApisTestRunner
 
     - name: Verificar archivos de Serenity
       run: ls -R target/site/serenity || echo "No se encontraron archivos"
