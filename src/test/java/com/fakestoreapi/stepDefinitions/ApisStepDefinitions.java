@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
+import org.testng.Assert;
 
 public class ApisStepDefinitions {
 
@@ -16,13 +17,18 @@ public class ApisStepDefinitions {
     }
 
     @When("realizo un GET a {string}")
-    public void realizoUnGETA(String string) {
+    public void realizoUnGETA(String endpoint) {
 
-        OnStage.theActorInTheSpotlight().attemptsTo(GetApis.getApis());
+        OnStage.theActorInTheSpotlight().attemptsTo(GetApis.getApis(endpoint));
 
     }
     @Then("el código de respuesta debe ser {int}")
-    public void elCódigoDeRespuestaDebeSer(Integer int1) {
+    public void elCódigoDeRespuestaDebeSer(Integer expectedStatusCode) {
+
+        Integer actualStatusCode = OnStage.theActorInTheSpotlight().recall("statusCode");
+
+        Assert.assertEquals(actualStatusCode, expectedStatusCode,
+                "El código de respuesta no es el esperado");
 
 
     }

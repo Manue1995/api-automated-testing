@@ -12,6 +12,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GetApis implements Task {
 
+    private final String endpoint;
+
+    public GetApis(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
+
     @Override
     public <T extends Actor> void performAs(T actor) {
 
@@ -25,16 +32,12 @@ public class GetApis implements Task {
         response.prettyPrint();
 
         // Validar código de respuesta
-        assertThat(response.getStatusCode())
-                .isEqualTo(String.valueOf(200));
+        actor.remember("statusCode", response.getStatusCode());
+
     }
 
-    private TestResult assertThat(int statusCode) {
-        return null;
-    }
-
-    public static GetApis getApis (){
-        return instrumented (GetApis.class);}
+    public static GetApis getApis (String endpoint){
+        return instrumented (GetApis.class, endpoint);}
 
 
 }
