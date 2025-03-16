@@ -1,23 +1,23 @@
 package com.fakestoreapi.stepDefinitions;
 
 import com.fakestoreapi.controller.GetApis;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import net.serenitybdd.screenplay.actors.Cast;
+
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
+
 import org.testng.Assert;
+
+
+
 
 public class ApisStepDefinitions {
 
-
-    @Before
-    public void setup() {
-        OnStage.setTheStage(new Cast());
-        OnStage.theActorCalled("Tester");
-    }
+    private final Actor tester = OnStage.theActorCalled("Tester");
 
     @When("realizo un GET a {string}")
     public void realizoUnGETA(String endpoint) {
+
 
         OnStage.theActorInTheSpotlight().attemptsTo(GetApis.getApis(endpoint));
 
