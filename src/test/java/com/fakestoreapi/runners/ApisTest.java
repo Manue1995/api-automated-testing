@@ -6,7 +6,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = "src/test/resources/features/apitest.feature",
-        tags = "@Test1",
+        //tags = "@Test1",
         glue = {"com.fakestoreapi.stepDefinitions"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
