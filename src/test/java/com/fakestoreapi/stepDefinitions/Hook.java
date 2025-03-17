@@ -14,12 +14,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static com.fakestoreapi.utils.Constant.Tester;
+
 public class Hook extends PageObject {
 
     @Before
     public void setTheStageAndConfigureApi() {
 
         OnStage.setTheStage(new OnlineCast());
+        OnStage.theActorCalled(String.valueOf(Tester));
         System.out.println("🌟 Escenario inicializado con el actor 'Tester'");
 
     }

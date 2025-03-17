@@ -9,49 +9,72 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import org.testng.Assert;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 public class ApisStepDefinitions {
 
 
-    private final Actor tester = OnStage.theActorCalled("Tester");
-
     @When("realizo un GET a {string}")
-    public void realizoUnGETA(String endpoint) {
+    public void realizoUnGETA(String string) {
 
-       OnStage.theActorInTheSpotlight().attemptsTo(GetApis.getApis(endpoint));
+       OnStage.theActorInTheSpotlight().attemptsTo(GetApis.getApis());
 
     }
     @When("realizo un POST a {string} con el JSON {string}")
-    public void realizoUnPOSTAConElJSON(String endpoint,String strings) {
+        public void realizoUnPOSTAConElJSON(String endpoint,String String) {
 
-       OnStage.theActorInTheSpotlight().attemptsTo(PostApis.postApis(endpoint));
+        List<String> endpoints = Arrays.asList("/products", "/users", "/carts");
+
+        Map<String, String> jsonFilePaths = Map.of(
+                "/products", "src/test/resources/postData/products.json",
+                "/users", "src/test/resources/postData/users.json",
+                "/carts", "src/test/resources/postData/carts.json");
+
+        OnStage.theActorInTheSpotlight().attemptsTo(PostApis.postApis(endpoints,jsonFilePaths));
 
     }
 
     @When("realizo un PUT a {string} con el JSON {string}")
     public void realizoUnPUTAConElJSON(String endpoint, String jsonFile) {
 
-        OnStage.theActorInTheSpotlight().attemptsTo(PutApis.putApis(endpoint,jsonFile));
+        List<String> endpoints = Arrays.asList("/products/1", "/users/2", "/carts/3");
+
+        Map<String, String> jsonFilePaths = Map.of(
+                "/products/1", "src/test/resources/putData/update_product.json",
+                "/users/2", "src/test/resources/putData/update_user.json",
+                "/carts/3", "src/test/resources/putData/update_cart.json" );
+
+        OnStage.theActorInTheSpotlight().attemptsTo(PutApis.putApis(endpoints,jsonFilePaths));
 
     }
 
     @When("realizo un DELETE a {string}")
     public void realizoUnDELETEA(String endpoint) {
 
-        OnStage.theActorInTheSpotlight().attemptsTo(DeleteApis.deleteApis(endpoint));
+        List<String> endpoints = Arrays.asList("/products/1", "/users/2", "/carts/3");
+
+        OnStage.theActorInTheSpotlight().attemptsTo(DeleteApis.deleteApis(endpoints));
 
     }
 
     @Then("el código de respuesta debe ser {int}")
     public void elCódigoDeRespuestaDebeSer(Integer expectedStatusCode) {
 
-      /*  System.out.println("GET Response:"+expectedStatusCode);
+        Integer actualStatusCode = OnStage.theActorInTheSpotlight().recall("statusCode");
+        String requestType = OnStage.theActorInTheSpotlight().recall("requestType"); // Recupera el tipo de request GET
 
-        int actualStatusCode = OnStage.theActorInTheSpotlight().recall("statusCode");
+        System.out.println(requestType + " Relsponse Code: " + actualStatusCode);
 
-        if (actualStatusCode != expectedStatusCode) {
-            throw new AssertionError("Código de estado esperado: " + expectedStatusCode + ", pero fue: " + actualStatusCode);
+        if (actualStatusCode == null) {
+            throw new AssertionError("No se encontró el código de estado en el actor para " + requestType);
         }
-*/
+
+        if (!actualStatusCode.equals(expectedStatusCode)) {
+            throw new AssertionError("Código de estado esperado para " + requestType + ": " + expectedStatusCode +
+                    ", pero fue: " + actualStatusCode);
+        }
     }
 
 }
