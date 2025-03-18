@@ -1,8 +1,14 @@
 {
   "id": 0,
-  "title": "string",
-  "price": 0.1,
-  "description": "string",
-  "category": "string",
-  "image": "http://example.com"
+  "userId": 0,
+  "products": [
+    {
+      "id": 22,
+      "title": "BMW",
+      "price": 12300000,
+      "description": "Carry Ultimo Model",
+      "category": "Alta Gama",
+      "image": "https://www.bmw.com.co/"
+    }
+  ]
 }

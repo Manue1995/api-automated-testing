@@ -5,9 +5,8 @@ import com.fakestoreapi.controller.GetApis;
 import com.fakestoreapi.controller.PostApis;
 import com.fakestoreapi.controller.PutApis;
 import io.cucumber.java.en.*;
-import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
-import org.testng.Assert;
+
 
 import java.util.Arrays;
 import java.util.List;
