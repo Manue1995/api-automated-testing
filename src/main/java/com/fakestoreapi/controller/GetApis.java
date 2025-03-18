@@ -59,7 +59,7 @@ public class GetApis implements Task {
             actor.remember("requestType", "GET");
 
             // Imprimir la respuesta en consola
-            System.out.println("POST Response:");
+            System.out.println("GET Response:");
             response.prettyPrint();
 
 

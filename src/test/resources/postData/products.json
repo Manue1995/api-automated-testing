@@ -1,7 +1,7 @@
 {
-  "title": "New Product",
-  "price": 919.99,
-  "description": "Producto Nuevo",
+  "title": "Jason",
+  "price": 1919.99,
+  "description": "Product",
   "category": "electronica",
   "image": "https://example.com/product.jpg"
 }
